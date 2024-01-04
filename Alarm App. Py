@@ -1,0 +1,84 @@
+import tkinter as tk
+import time
+
+
+class AlarmApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title('alarm app')
+        self.minsize(600, 400)
+        self.iconbitmap('logo.ico',)
+        self.configure(bg='#FFA500')  # Set background color
+
+
+
+        # Load logo
+        logo_image = tk.PhotoImage(file="logo.PNG")
+        self.logo_label = tk.Label(self, image=logo_image, bg='#FFA500')
+        self.logo_label.image = logo_image
+        self.logo_label.pack(pady=10)
+
+        # frame to hold the clock label for customization
+        clock_frame = tk.Frame(self, bg='#FFA500')
+        clock_frame.pack(pady=10)
+
+        # font and text color for the clock label
+        clock_font = ('Helvetica', 40)
+        clock_text_color = '#076107'
+
+        # the clock label
+        self.label = tk.Label(clock_frame, text="22:55:20", font=clock_font, fg=clock_text_color, bg='black', padx=10, pady=5, anchor='center')
+        self.label.pack()
+
+        # Instruction label next to the entry field
+        self.instruction_label = tk.Label(self, text="Enter time in HH:MM format", font=("Helvetica", 12), bg='#FFA500')
+        self.instruction_label.pack(pady=(5, 5))  # Add space between label and entry
+
+        # Entry widget
+        self.entry = tk.Entry(self, font=("Helvetica", 16), bg='#FFF', fg='#076107', width=25)
+        self.entry.pack(pady=(0, 10))  # Add space between entry and buttons
+
+        # Set Alarm Button
+        self.set_button = tk.Button(self, text="Set Alarm", command=self.set_alarm, bg='#E8E81C', fg='#076107', width=20)
+        self.set_button.pack(pady=2)
+
+        # Dismiss Alarm Button
+        self.dismiss_button = tk.Button(self, text="Dismiss Alarm", command=self.dismiss_alarm, bg='#E8E81C', fg='#076107', width=20)
+        self.dismiss_button.pack(pady=2)
+
+        # Shutdown Button
+        self.shutdown_button = tk.Button(self, text="Shutdown", command=self.shutdown_application, bg='#E8E81C', fg='#076107', width=20)
+        self.shutdown_button.pack(pady=2)
+
+        self.status_label = tk.Label(self, text="", font=("Helvetica", 12), fg='red', bg='#FFA500')
+        self.status_label.pack(pady=5)
+
+
+        self.clock()
+
+    def clock(self):
+        
+        current_time = time.strftime("%H:%M:%S")
+        self.label.config(text=current_time, padx=40, pady=20)
+
+
+        self.after(1000, self.clock)
+
+    def set_alarm(self):
+        
+        pass
+
+    def play_alarm(self):
+        
+        pass
+
+    def dismiss_alarm(self):
+        
+        pass
+
+    def shutdown_application(self):
+        self.destroy()
+
+if __name__ == "__main__":
+    app = AlarmApp()
+    app.mainloop()
